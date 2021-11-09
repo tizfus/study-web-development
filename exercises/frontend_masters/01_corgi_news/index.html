@@ -73,6 +73,17 @@
         .topic-opinion  { background-color: #74b9ff; }
         .topic-sports  { background-color: #a29bfe; }
     </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            const images = [ 
+                    "img/corgi_1.jpg", "img/corgi_2.jpg", "img/corgi_3.jpg", "img/corgi_4.jpg",
+                    "img/corgi_5.jpg", "img/corgi_6.jpg", "img/corgi_7.jpg", "img/corgi_8.jpg" ]
+                .map(imgPath => { return { id: Math.random(), path:imgPath } })
+                .sort((img1, img2) => img1.id - img2.id)
+
+            document.getElementsByClassName('main-content-img')[0].src = images[0].path
+        }
+    </script>
 </head>
 <body>
     <div class="main-title">
@@ -92,7 +103,7 @@
             </div>
             <div class="main-content">
                 <h2>BREAKING: Puppies Are Adorable</h2>
-                <img class="main-content-img" src="http://placecorgi.com/500/250">
+                <img class="main-content-img">
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolores? Illo dolores, rerum iste aut porro doloribus fugit itaque voluptas.
                 </p>
