@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .main-title {
+            text-align: center;
+            font-family: "Snell Roundhand";
+            /* Perché continua a rimanere bold? */
+            font-weight: normal;
+            /* Perché ho dovuto dimezzare la grandezza per farlo ugale? */
+            font-size: 30px;
+        }
+        .page {
+            border-top: 3px solid;
+        }
+        .page h1,
+        .page h2 {
+            font-size: 30px;
+            text-align: center;
+            font-weight: normal;
+            font-style: italic;
+        }
+        .contents {
+            display: flex;
+            border-bottom: 3px solid;
+            border-left: 1px solid;
+        }
+        .contents > div {
+            border-right: 1px solid;
+        }
+        .side-content {
+            width: 25%;
+            padding: 10px;
+        }
+        .main-content {
+            width: 50%;
+            padding: 10px;
+        }
+        .main-content-img {
+            width: 100%;
+        }
+        .topic-content {
+            width: 75%;
+        }
+        .topic-content > div {
+            height: 20%;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .topic-content > div a {
+            /* Perché ho dovuto specificarlo? */
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: "Futura";
+            color: #666;
+        }
+        .topic-content > div a:hover {
+            text-decoration: underline;
+        }
+        .topic-politics { background-color: #ffeaa7; }
+        .topic-technology  { background-color: #81ecec; }
+        .topic-local { background-color: #55efc4; }
+        .topic-opinion  { background-color: #74b9ff; }
+        .topic-sports  { background-color: #a29bfe; }
+    </style>
+</head>
+<body>
+    <div class="main-title">
+        <h1>The News Times</h1>
+    </div>
+    
+    <div class="page">
+        <div class="contents">
+            <div class="side-content">
+                <h2>Student Learns HTML</h2>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ad in quas alias non! Expedita similique et dolore illum doloremque vel accusantium ut eos tempora sequi, doloribus vitae mollitia praesentium ex ullam? Dolorem labore fugiat neque nostrum porro vero fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam corrupti, eius odio neque incidunt esse fuga veritatis ipsum, eligendi mollitia, porro quasi provident nisi sit! Doloribus, eligendi nemo, ad laudantium cupiditate aspernatur eveniet asperiores modi praesentium voluptas eos sunt odio.
+                </p>
+            </div>
+            <div class="main-content">
+                <h2>BREAKING: Puppies Are Adorable</h2>
+                <img class="main-content-img" src="http://placecorgi.com/500/250">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolores? Illo dolores, rerum iste aut porro doloribus fugit itaque voluptas.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium incidunt ullam ea magni ipsam perferendis ratione pariatur enim repellendus quia?
+                </p>
+            </div>
+            <div class="side-content">
+                <h2>CSS Is Apparently a Thing</h2>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ad in quas alias non! Expedita similique et dolore illum doloremque vel accusantium ut eos tempora sequi, doloribus vitae mollitia praesentium ex ullam? Dolorem labore fugiat neque nostrum porro vero fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam corrupti, eius odio neque incidunt esse fuga veritatis ipsum, eligendi mollitia, porro quasi provident nisi sit! Doloribus, eligendi nemo, ad laudantium cupiditate aspernatur eveniet asperiores modi praesentium voluptas eos sunt odio.
+                </p>
+            </div>
+        </div>
+        <div class="contents">
+            <div class="side-content">
+                <h2>Boy Likes Turtles</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, perferendis! Accusamus asperiores quod vitae architecto natus alias fugiat aliquam unde sint expedita repellat rerum, obcaecati hic placeat recusandae quaerat. Dolores excepturi earum minus magni! Animi aperiam eligendi molestias necessitatibus ducimus.
+                </p>
+                <p>
+                    Voluptate, ut, cupiditate ducimus vitae blanditiis ex impedit debitis est tempora dolores nam sed. Esse nobis ea inventore qui enim quia beatae ab commodi laboriosam quam aliquam aut perspiciatis fuga nam rerum temporibus voluptatum explicabo voluptate, pariatur ullam laudantium eligendi.
+                </p>
+            </div>
+            <div class="topic-content">
+                <div class="topic-politics">
+                    <a href="#">Politics</a>
+                </div>
+                <div class="topic-technology">
+                    <a href="#">Technology</a>
+                </div>
+                <div class="topic-local">
+                    <a href="#">Local</a>
+                </div>
+                <div class="topic-opinion">
+                    <a href="#">Opinion</a>
+                </div>
+                <div class="topic-sports">
+                    <a href="#">Sports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
