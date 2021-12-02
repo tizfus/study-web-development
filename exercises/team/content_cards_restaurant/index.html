@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Cards Restaurant</title>
+    <style>
+        html,
+        body {
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            background-image: url("breakfast.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .card-side {
+            width: 300px;
+        }
+        .card-middle {
+            width: 350px;
+        }
+        .card {
+            background-color: #fffa;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 15px lightgray;
+            margin: 10px;
+        }
+        .card-title {
+            text-align: center;
+        }
+        .card-cover {
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            justify-content: end;
+        }
+        .card-price {
+            color: white;
+            background-color: green;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            width: 40px;
+            position: absolute;
+        }
+        .card-cover-img {
+            align-self: start;
+            width: 99%;
+            border-radius: 10px;
+        }
+        @font-face {
+            font-family: "Ubuntu";
+            src: url("ubuntu.ttf");
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-side">
+            <h2 class="card-title">Farmstand Salad</h2>
+            <div class="card-cover">
+                <img class="card-cover-img" src="./farmstand_salad.jpg">  
+                <div class="card-price">$9</div>
+            </div>
+            <p>
+                Dig into the freshest veggies of the season! This salad-in-a-jar features a mixture of leafy greens and seasonal vegetables, fresh from the farmer’s market.
+            </p>
+            <p>
+                Served with your choice of dressing on the side: housemade ranch, cherry balsamic vinaigrette, creamy chipotle, avocado green goddess, or honey mustard. Add your choice of protein for $2 more.
+            </p>
+        </div>
+        <div class="card card-middle">
+            <h2 class="card-title">Ultimate Reuben</h2>
+            <div class="card-cover">
+                <img class="card-cover-img" src="./ultimate_reuben.jpg">  
+                <div class="card-price">$18</div>
+            </div>
+            <p>
+                All great meals take time, but this one takes it to the next level! More than 650 hours of fermenting, brining, aging, and curing goes into each and every one of our legendary Reuben sandwiches.
+            </p>
+            <p>
+                Every element of this extraordinary sandwich is handcrafted in our kitchens, from the rye bread baked from our secret recipe to the cave-aged Swiss cheese, right down to the pickle. The only thing we didn’t make on the premises is the toothpick ( but we’re looking into how to do that).
+            </p>
+            <p>
+                This unforgettable sandwich has all of the classic Reuben elements: corned beef, rye bread, creamy Russian dressing, sauerkraut, plus a sweet gherkin pickle. No substitions please!
+            </p>
+            <p>
+                Add a side of french fries or sweet potato fries for $2 more, or our housemade pub chips for $1.
+            </p>
+        </div>
+        <div class="card card-side">
+            <h2 class="card-title">Fig & Berry Plate</h2>
+            <div class="card-cover">
+                <img class="card-cover-img" src="./fig_berry_plate.jpg">  
+                <div class="card-price">$16</div>
+            </div>
+            <p>
+                Seasonal.
+            </p>
+            <p>
+                A succulent sextet of fresh figs join with a selection of bodacious seasonal berries in this refreshing, shareable dessert.
+            </p>
+            <p>
+                Choose your drizzle: cherry-balsamic vinegar, local honey, or housemade chocolate sauce.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
