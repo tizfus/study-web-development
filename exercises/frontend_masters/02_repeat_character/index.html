@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repeat Character</title>
+    <script>
+        const character = 'f'
+        const timesToRepeat = 10
+        
+        function forSolution(){
+            let response = ''
+            for(let i = 0; i < timesToRepeat; i++) {
+                response += character
+            }
+
+            return `FOR: ${response}`
+        }
+        
+        function whileSolution(){
+            let response = ''
+            while(response.length < 10) {
+                response += character
+            }
+
+            return `WHILE: ${response}`
+        }
+
+        function arraySolution(index) {
+            return 'ARRAY: ' + Array(timesToRepeat)
+                .fill(character)
+                .reduce((result, value) => result += value, '')
+        }
+
+        console.log(forSolution())
+        console.log(whileSolution())
+        console.log(arraySolution())
+        console.log(`REPEAT: ${character.repeat(timesToRepeat)}`)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
