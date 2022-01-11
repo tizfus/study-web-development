@@ -16,13 +16,14 @@ window.onload = function(){
         }
     }
 
-    const plusOperator = operators.filter(operator => operator.textContent == '+')[0]
-    
-    plusOperator.onclick = function() {
-        calculation.push(display.textContent)
-        calculation.push((a, b) => a + b)
-        display.textContent = ''
-    }
+    operators.forEach(operator => 
+        operator.onclick = function () {
+            calculation.push(display.textContent)
+            calculation.push(operation(operator.textContent))
+            console.log(calculation)
+            display.textContent = ''
+        }
+    );
 
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
 
@@ -43,13 +44,31 @@ window.onload = function(){
 
         if(typeof(item) == 'function'){
             const operation = item
-            const number = +calcs.shift()
+            const number = toInt(calcs.shift())
             
             return operation(initValue, number)
         }
         
-        return calculate(+item, calcs)
-        
+        return calculate(toInt(item), calcs)
+    
 
+    }
+
+    function toInt(string) { return +string }
+
+    function operation(operator) {
+        switch(operator) {
+            case '-':
+                return (a,b) => a - b
+
+            case '+':
+                return (a,b) => a + b
+
+            case '*':
+                return (a,b) => a * b
+            
+            case '/':
+                return (a,b) => a / b
+        } 
     }
 }
