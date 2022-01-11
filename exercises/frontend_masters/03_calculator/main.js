@@ -38,7 +38,7 @@ window.onload = function(){
         console.debug(`${initValue} # ${operations}`)
         
         if(operations.length == 0) {
-            return 0
+            return initValue
         }
         
         const item = operations.shift()
@@ -47,7 +47,7 @@ window.onload = function(){
             const operation = item
             const number = toInt(operations.shift())
             
-            return operation(initValue, number)
+            return calculate(operation(initValue, number), operations)
         }
         
         return calculate(toInt(item), operations)
