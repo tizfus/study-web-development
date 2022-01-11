@@ -1,7 +1,15 @@
 window.onload = function(){
-    let operations = []
-    let clean = true
+    const status = {
+        operator: '+',
+        firstValue: 0,
+        secondValue: 0,
 
+        reset(){
+            this.operator = '+'
+            this.firstValue = 0
+            this.secondValue = 0
+        }
+    }
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
     const numbers = keys.filter(x => x.classList.contains('number'))
     const operators = keys.filter(x => x.classList.contains('operator'))
@@ -13,46 +21,35 @@ window.onload = function(){
     numbers.forEach(number => number.onclick = appendDigit)
     operators.forEach(operator => operator.onclick = appendOperation)
     equalsOperator.onclick = printResult
-
+    display.textContent = '0'
 
 
     function appendDigit() {
-        if(clean) { clear() }
+        if(display.textContent == '0') {
+            display.textContent = this.textContent
+            return
+        }
         display.textContent += this.textContent
     }
 
     function appendOperation() {
-        operations.push(display.textContent)
-        operations.push(operation(this.textContent))
-        console.log(operations)
-        clear()
+        status.firstValue = display.textContent
+        status.operator = this.textContent
+        display.textContent = '0'
     }
 
     function printResult(){
-        operations.push(display.textContent)
-        clean = true
-        display.textContent = calculate(0, operations)
+        status.secondValue = display.textContent
+        display.textContent = calculate()
     }
 
-    function calculate(initValue, operations){
-        console.debug(`${initValue} # ${operations}`)
-        
-        if(operations.length == 0) {
-            return initValue
-        }
-        
-        const item = operations.shift()
-
-        if(typeof(item) == 'function'){
-            const operation = item
-            const number = toInt(operations.shift())
-            
-            return calculate(operation(initValue, number), operations)
-        }
-        
-        return calculate(toInt(item), operations)
-    
-
+    function calculate(){
+        const result =  operation(status.operator)(
+            toInt(status.firstValue),
+            toInt(status.secondValue)
+        )
+        status.reset()
+        return result
     }
 
     function toInt(string) { return +string }
@@ -71,10 +68,5 @@ window.onload = function(){
             case '/':
                 return (a,b) => a / b
         } 
-    }
-
-    function clear() { 
-        clean = false
-        display.textContent = '' 
     }
 }
