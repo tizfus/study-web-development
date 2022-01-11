@@ -1,42 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
 .calc {
     font-size: xx-large;
     background-color: black;
-    width: 400px;
-    height: 600px;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     border: black solid 2px;
 }
 
-.display {
-    padding: 15px;
+.display,
+.key {
     height: 100px;
+}
+
+.display {
     background-color: lightgray;
     display: flex;
     justify-content: end;
     align-items: center;
+    margin-bottom: 3px;
+    padding: 20px;
 }
 
-.keypad {
+.keypad-row {
     display: flex;
     flex-direction: row;
     background-color: gray;
+    flex-wrap: wrap;
 }
 
 .key {
     width: 100px;
-    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 1px;
 }
 
 .key-2 {
     width: 200px;
-}
-
-.key-3 {
-    width: 300px;
+    margin: 1px 2px;
 }
 
 .numbers {
@@ -46,22 +52,22 @@
     align-content: start;
 }
 
-.numbers .key {
+.number.key {
     background-color: white;
 }
-.numbers .key:hover {
+.number.key:hover {
     background-color: lightgray;
 }
-.numbers .key:active {
+.number.key:active {
     background-color: gray;
 }
 
-.operators .key {
+.operator.key {
     background-color: gold;
 }
-.operators .key:hover {
+.operator.key:hover {
     background-color: goldenrod;
 }
-.operators .key:active {
+.operator.key:active {
     background-color: darkgoldenrod;
 }

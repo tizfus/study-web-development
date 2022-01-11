@@ -3,8 +3,8 @@ window.onload = function(){
     let clean = true
 
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
-    const numbers = keys.filter(x => x.parentNode.classList.contains('numbers'))
-    const operators = keys.filter(x => x.parentNode.classList.contains('operators'))
+    const numbers = keys.filter(x => x.classList.contains('number'))
+    const operators = keys.filter(x => x.classList.contains('operator'))
     const display = document.getElementsByClassName('display')[0]
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
 
