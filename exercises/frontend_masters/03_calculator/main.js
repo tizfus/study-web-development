@@ -1,5 +1,6 @@
 window.onload = function(){
     const status = {
+        resetDisplay: true,
         operator: '+',
         firstValue: 0,
         secondValue: 0,
@@ -16,31 +17,26 @@ window.onload = function(){
     const display = document.getElementsByClassName('display')[0]
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
 
-
-
     numbers.forEach(number => number.onclick = appendDigit)
     operators.forEach(operator => operator.onclick = appendOperation)
     equalsOperator.onclick = printResult
-    display.textContent = '0'
+    defaultText()
 
 
     function appendDigit() {
-        if(display.textContent == '0') {
-            display.textContent = this.textContent
-            return
-        }
-        display.textContent += this.textContent
+        updateText(this.textContent)
     }
 
     function appendOperation() {
-        status.firstValue = display.textContent
+        status.firstValue = actualText()
         status.operator = this.textContent
-        display.textContent = '0'
+        status.resetDisplay = true
     }
 
     function printResult(){
-        status.secondValue = display.textContent
-        display.textContent = calculate()
+        status.secondValue = actualText()
+        defaultText()
+        updateText(calculate())
     }
 
     function calculate(){
@@ -52,7 +48,7 @@ window.onload = function(){
         return result
     }
 
-    function toInt(string) { return +string }
+    function toInt(num) { return +num }
 
     function operation(operator) {
         switch(operator) {
@@ -69,4 +65,15 @@ window.onload = function(){
                 return (a,b) => a / b
         } 
     }
+
+    function actualText() { return display.textContent }
+    function updateText(text) { 
+        status.resetDisplay ? 
+            display.textContent = text : 
+            display.textContent += text;
+        
+        status.resetDisplay = false
+    }
+    function defaultText() { display.textContent = '0'; status.resetDisplay = true }
+    
 }
