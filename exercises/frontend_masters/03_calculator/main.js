@@ -1,5 +1,6 @@
 window.onload = function(){
     let calculation = []
+    let clean = true
 
     const keys = Array.prototype.slice.call(
         document.getElementsByClassName('key')
@@ -12,6 +13,9 @@ window.onload = function(){
 
     for(let number of numbers) {
         number.onclick = function() {
+            if(clean) {
+                clear()
+            }
             display.textContent += this.textContent
         }
     }
@@ -21,7 +25,7 @@ window.onload = function(){
             calculation.push(display.textContent)
             calculation.push(operation(operator.textContent))
             console.log(calculation)
-            display.textContent = ''
+            clear()
         }
     );
 
@@ -29,6 +33,7 @@ window.onload = function(){
 
     equalsOperator.onclick = () => {
         calculation.push(display.textContent)
+        clean = true
         display.textContent = calculate(0, calculation)
     }
 
@@ -70,5 +75,10 @@ window.onload = function(){
             case '/':
                 return (a,b) => a / b
         } 
+    }
+
+    function clear() { 
+        clean = false
+        display.textContent = '' 
     }
 }
