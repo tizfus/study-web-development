@@ -1,6 +1,4 @@
 window.onload = function(){
-    let resetDisplay = true
-
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
     const digit = keys.filter(x => x.classList.contains('number'))
     const operators = keys.filter(x => x.classList.contains('operator'))
@@ -15,16 +13,21 @@ window.onload = function(){
 
     function setup() {
         cleanDisplay()
-        bindDigitOnClick(function() { updateText(this.textContent) })
+        bindDigitOnClick(function() { writeDigit(this.textContent) })
     }
 
     function bindDigitOnClick(event) {
         digit.forEach(number => number.onclick = event)
     }
 
+    function writeDigit(text){
+        writeText(text)
+        bindDigitOnClick(function() { appendText(this.textContent) })
+    }
+
     function appendOperation() {
         equalsOperator.onclick = prepareResult(actualText(), this.textContent)
-        cleanDisplay()
+        bindDigitOnClick(function() { writeDigit(this.textContent) })
     }
 
     function prepareResult(firstValue, operator) {
@@ -37,8 +40,7 @@ window.onload = function(){
     }
 
     function printResult(firstValue, operator, secondValue) {
-        resetDisplay = true
-        updateText(calculate(firstValue, operator, secondValue))
+        writeDigit(calculate(firstValue, operator, secondValue))
     }
 
     function calculate(firstValue, operator, secondValue) {
@@ -77,20 +79,16 @@ window.onload = function(){
                 const newText = actualText().slice(0, -1)
                 cleanDisplay()
                 if(newText.length != 0) {
-                    updateText(newText)
+                    writeDigit(newText)
                 }
                 break;
         } 
     }
 
     function actualText() { return display.textContent }
-    function updateText(text) { 
-        resetDisplay ? 
-            display.textContent = text : 
-            display.textContent += text;
-        
-        resetDisplay = false
-    }
-    function cleanDisplay() { display.textContent = '0'; resetDisplay = true }
+    function appendText(text) { display.textContent += text }
+    function writeText(text) { display.textContent = text }
+
+    function cleanDisplay() { display.textContent = '0'; }
     
 }
