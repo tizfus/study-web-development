@@ -12,7 +12,7 @@ window.onload = function(){
     setup()
 
     function setup() {
-        defaultText()
+        cleanDisplay()
         bindDigitOnClick(function() { updateText(this.textContent) })
     }
 
@@ -22,26 +22,25 @@ window.onload = function(){
 
     function appendOperation() {
         equalsOperator.onclick = prepareResult(actualText(), this.textContent)
-        defaultText()
+        cleanDisplay()
     }
 
     function prepareResult(firstValue, operator) {
         return () => {
             const secondValue = actualText()
 
-            equalsOperator.onclick = () => {
-                resetDisplay = true
-                updateText(calculate(actualText(), operator, secondValue))
-            }
-
-            resetDisplay = true
-            updateText(calculate(firstValue, operator,secondValue ))
-
+            equalsOperator.onclick = () => printResult(actualText(), operator, secondValue)
+            printResult(firstValue, operator, secondValue)
             bindDigitOnClick(function(){
                 setup()
                 this.onclick()
             })
         }
+    }
+
+    function printResult(firstValue, operator, secondValue) {
+        resetDisplay = true
+        updateText(calculate(firstValue, operator, secondValue))
     }
 
     function calculate(firstValue, operator, secondValue) {
@@ -78,6 +77,6 @@ window.onload = function(){
         
         resetDisplay = false
     }
-    function defaultText() { display.textContent = '0'; resetDisplay = true }
+    function cleanDisplay() { display.textContent = '0'; resetDisplay = true }
     
 }
