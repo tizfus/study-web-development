@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+}
+
 .calc {
     font-size: xx-large;
     background-color: black;
