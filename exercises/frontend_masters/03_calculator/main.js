@@ -25,11 +25,18 @@ window.onload = function(){
         defaultText()
     }
 
-    function prepareResult(firstlValue, operator) {
+    function prepareResult(firstValue, operator) {
         return () => {
+            const secondValue = actualText()
+
+            equalsOperator.onclick = () => {
+                resetDisplay = true
+                updateText(calculate(actualText(), operator, secondValue))
+            }
+
             resetDisplay = true
-            updateText(calculate(firstlValue, operator, actualText()))
-            equalsOperator.onclick = null
+            updateText(calculate(firstValue, operator,secondValue ))
+
             bindDigitOnClick(function(){
                 setup()
                 this.onclick()
