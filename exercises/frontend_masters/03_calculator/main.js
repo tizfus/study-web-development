@@ -1,16 +1,6 @@
 window.onload = function(){
-    const status = {
-        resetDisplay: true,
-        operator: '+',
-        firstValue: 0,
-        secondValue: 0,
+    let resetDisplay = true
 
-        reset(){
-            this.operator = '+'
-            this.firstValue = 0
-            this.secondValue = 0
-        }
-    }
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
     const numbers = keys.filter(x => x.classList.contains('number'))
     const operators = keys.filter(x => x.classList.contains('operator'))
@@ -19,7 +9,7 @@ window.onload = function(){
 
     numbers.forEach(number => number.onclick = appendDigit)
     operators.forEach(operator => operator.onclick = appendOperation)
-    equalsOperator.onclick = printResult
+    
     defaultText()
 
 
@@ -28,24 +18,30 @@ window.onload = function(){
     }
 
     function appendOperation() {
-        status.firstValue = actualText()
-        status.operator = this.textContent
-        status.resetDisplay = true
-    }
-
-    function printResult(){
-        status.secondValue = actualText()
+        equalsOperator.onclick = prepareResult(actualText(), this.textContent)
         defaultText()
-        updateText(calculate())
     }
 
-    function calculate(){
-        const result =  operation(status.operator)(
-            toInt(status.firstValue),
-            toInt(status.secondValue)
+    function prepareResult(firstlValue, operator) {
+        return () => {
+            const secondValue = actualText()
+            resetDisplay = true
+            updateText(calculate(firstlValue, operator, secondValue))
+            equalsOperator.onclick = null
+            numbers.forEach(number => number.onclick = function(){
+                defaultText();
+                number.onclick = appendDigit
+                number.onclick()
+            })
+        }
+    }
+
+    function calculate(firstValue, operator, secondValue) {
+        console.log(`${firstValue} ${operator} ${secondValue}`)
+        return operation(operator)(
+            toInt(firstValue),
+            toInt(secondValue)
         )
-        status.reset()
-        return result
     }
 
     function toInt(num) { return +num }
@@ -68,12 +64,12 @@ window.onload = function(){
 
     function actualText() { return display.textContent }
     function updateText(text) { 
-        status.resetDisplay ? 
+        resetDisplay ? 
             display.textContent = text : 
             display.textContent += text;
         
-        status.resetDisplay = false
+        resetDisplay = false
     }
-    function defaultText() { display.textContent = '0'; status.resetDisplay = true }
+    function defaultText() { display.textContent = '0'; resetDisplay = true }
     
 }
