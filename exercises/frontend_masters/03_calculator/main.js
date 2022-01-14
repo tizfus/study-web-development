@@ -4,11 +4,13 @@ window.onload = function(){
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
     const digit = keys.filter(x => x.classList.contains('number'))
     const operators = keys.filter(x => x.classList.contains('operator'))
+    const actions = keys.filter(x => x.classList.contains('action'))
     const display = document.getElementsByClassName('display')[0]
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
     
     operators.forEach(operator => operator.onclick = appendOperation)
-    
+    actions.forEach(action => action.onclick = () => runAction(action.textContent))
+
     setup()
 
     function setup() {
@@ -66,6 +68,20 @@ window.onload = function(){
             
             case '/':
                 return (a,b) => a / b
+        } 
+    }
+
+    function runAction(action) {
+        switch(action) {
+            case 'C':
+                equalsOperator.onclick = null
+                setup()
+                break;
+            case '<':
+                const newText = actualText().slice(0, -1)
+                cleanDisplay()
+                updateText(newText)
+                break;
         } 
     }
 
