@@ -5,7 +5,7 @@
 .calc {
     font-size: xx-large;
     background-color: black;
-    width: fit-content;
+    width: 400px;
     display: flex;
     flex-direction: column;
     border: black solid 2px;
@@ -32,7 +32,7 @@
 }
 
 .key {
-    width: 100px;
+    width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
