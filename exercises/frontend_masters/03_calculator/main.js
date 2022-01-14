@@ -1,33 +1,50 @@
 window.onload = function(){
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
     const digit = keys.filter(x => x.classList.contains('number'))
-    const operators = keys.filter(x => x.classList.contains('operator'))
-    const actions = keys.filter(x => x.classList.contains('action'))
     const display = document.getElementsByClassName('display')[0]
+    const actions = keys.filter(x => x.classList.contains('action'))
+    const operators = keys.filter(x => x.classList.contains('operator'))
+    operators.forEach(operator => operator.onclick = operatorOnClick)
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
     
-    operators.forEach(operator => operator.onclick = appendOperation)
-    actions.forEach(action => action.onclick = () => runAction(action.textContent))
+    const operation = {}
+    operation['-'] = (a,b) => a - b;
+    operation['+'] = (a,b) => a + b;
+    operation['*'] = (a,b) => a * b;
+    operation['/'] = (a,b) => a / b;
 
+
+    const action = {}
+    action['C'] = () => setup()
+    action['<'] = () => writeText(actualText().slice(0, -1))
+
+    actions.forEach(act => act.onclick = action[act.textContent])
+    
+    
     setup()
 
     function setup() {
+        equalsOperator.onclick = null
         cleanDisplay()
-        bindDigitOnClick(function() { writeDigit(this.textContent) })
+        enableOverrideDigit()
     }
 
-    function bindDigitOnClick(event) {
-        digit.forEach(number => number.onclick = event)
+    function bindAllDigit(event){ digit.forEach(number => number.onclick = event) }
+    function enableOverrideDigit() {
+        bindAllDigit(function() {
+            writeText(this.textContent)
+            
+            bindAllDigit(function() {
+                actualText() === '0' ?
+                    writeText(this.textContent)
+                    : appendText(this.textContent) 
+            })
+        })
     }
 
-    function writeDigit(text){
-        writeText(text)
-        bindDigitOnClick(function() { appendText(this.textContent) })
-    }
-
-    function appendOperation() {
+    function operatorOnClick() {
         equalsOperator.onclick = prepareResult(actualText(), this.textContent)
-        bindDigitOnClick(function() { writeDigit(this.textContent) })
+        enableOverrideDigit()
     }
 
     function prepareResult(firstValue, operator) {
@@ -39,13 +56,11 @@ window.onload = function(){
         }
     }
 
-    function printResult(firstValue, operator, secondValue) {
-        writeDigit(calculate(firstValue, operator, secondValue))
-    }
+    function printResult(firstValue, operator, secondValue) { writeText(calculate(firstValue, operator, secondValue)) }
 
     function calculate(firstValue, operator, secondValue) {
         console.log(`${firstValue} ${operator} ${secondValue}`)
-        return operation(operator)(
+        return operation[operator](
             toInt(firstValue),
             toInt(secondValue)
         )
@@ -53,41 +68,9 @@ window.onload = function(){
 
     function toInt(num) { return +num }
 
-    function operation(operator) {
-        switch(operator) {
-            case '-':
-                return (a,b) => a - b
-
-            case '+':
-                return (a,b) => a + b
-
-            case '*':
-                return (a,b) => a * b
-            
-            case '/':
-                return (a,b) => a / b
-        } 
-    }
-
-    function runAction(action) {
-        switch(action) {
-            case 'C':
-                equalsOperator.onclick = null
-                setup()
-                break;
-            case '<':
-                const newText = actualText().slice(0, -1)
-                cleanDisplay()
-                if(newText.length != 0) {
-                    writeDigit(newText)
-                }
-                break;
-        } 
-    }
-
     function actualText() { return display.textContent }
     function appendText(text) { display.textContent += text }
-    function writeText(text) { display.textContent = text }
+    function writeText(text) { display.textContent = text || '0' }
 
     function cleanDisplay() { display.textContent = '0'; }
     
