@@ -52,12 +52,15 @@
     align-content: start;
 }
 
+.action.key,
 .number.key {
     background-color: white;
 }
+.action.key:hover,
 .number.key:hover {
     background-color: lightgray;
 }
+.action.key:hover,
 .number.key:active {
     background-color: gray;
 }
