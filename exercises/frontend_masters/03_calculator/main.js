@@ -2,19 +2,22 @@ window.onload = function(){
     let resetDisplay = true
 
     const keys = Array.prototype.slice.call(document.getElementsByClassName('key'))
-    const numbers = keys.filter(x => x.classList.contains('number'))
+    const digit = keys.filter(x => x.classList.contains('number'))
     const operators = keys.filter(x => x.classList.contains('operator'))
     const display = document.getElementsByClassName('display')[0]
     const equalsOperator = operators.filter(operator => operator.textContent == '=')[0]
-
-    numbers.forEach(number => number.onclick = appendDigit)
+    
     operators.forEach(operator => operator.onclick = appendOperation)
     
-    defaultText()
+    setup()
 
+    function setup() {
+        defaultText()
+        bindDigitOnClick(function() { updateText(this.textContent) })
+    }
 
-    function appendDigit() {
-        updateText(this.textContent)
+    function bindDigitOnClick(event) {
+        digit.forEach(number => number.onclick = event)
     }
 
     function appendOperation() {
@@ -24,14 +27,12 @@ window.onload = function(){
 
     function prepareResult(firstlValue, operator) {
         return () => {
-            const secondValue = actualText()
             resetDisplay = true
-            updateText(calculate(firstlValue, operator, secondValue))
+            updateText(calculate(firstlValue, operator, actualText()))
             equalsOperator.onclick = null
-            numbers.forEach(number => number.onclick = function(){
-                defaultText();
-                number.onclick = appendDigit
-                number.onclick()
+            bindDigitOnClick(function(){
+                setup()
+                this.onclick()
             })
         }
     }
