@@ -33,10 +33,6 @@ window.onload = function(){
 
             equalsOperator.onclick = () => printResult(actualText(), operator, secondValue)
             printResult(firstValue, operator, secondValue)
-            bindDigitOnClick(function(){
-                setup()
-                this.onclick()
-            })
         }
     }
 
@@ -80,7 +76,9 @@ window.onload = function(){
             case '<':
                 const newText = actualText().slice(0, -1)
                 cleanDisplay()
-                updateText(newText)
+                if(newText.length != 0) {
+                    updateText(newText)
+                }
                 break;
         } 
     }
